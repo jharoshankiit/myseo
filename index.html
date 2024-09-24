@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Facet Filter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .facet-filter {
+            width: 300px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .facet-filter h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .accordion {
+            border-top: 1px solid #ddd;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px; /* Added space between groups */
+        }
+
+        .accordion-button {
+            background-color: #f9f9f9;
+            border: none;
+            outline: none;
+            width: 100%;
+            text-align: left;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-content {
+            padding: 10px;
+        }
+
+        .accordion-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .accordion-content li {
+            margin: 5px 0;
+            display: flex; /* Ensure checkbox and label are on the same line */
+            align-items: center;
+        }
+
+        .accordion-content label {
+            margin-left: 5px;
+            word-break: break-word; /* Break long labels into multiple lines */
+        }
+
+        .accordion-content input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .clear-button {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .results {
+            flex-grow: 1;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .results h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .results table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .results th, .results td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .results th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="facet-filter">
+            <h2>Filter by:</h2>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-button active">
+                        Category <i class="fas fa-minus"></i>
+                    </button>
+                    <div class="accordion-content" style="display: block;">
+                        <ul>
+                            <li><input type="checkbox" id="electronics"><label for="electronics">Electronics</label></li>
+                            <li><input type="checkbox" id="home-appliances"><label for="home-appliances">Home Appliances</label></li>
+                            <li><input type="checkbox" id="books"><label for="books">Books</label></li>
+                            <li><input type="checkbox" id="fashion"><label for="fashion">Fashion</label></li>
+                            <li><input type="checkbox" id="sports"><label for="sports">Sports & Outdoors</label></li>
+                        </ul>
+                        <button class="clear-button" onclick="clearFilters('category')">Clear</button>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-button active">
+                        Brand <i class="fas fa-minus"></i>
+                    </button>
+                    <div class="accordion-content" style="display: block;">
+                        <ul>
+                            <li><input type="checkbox" id="brand1"><label for="brand1">Brand 1</label></li>
+                            <li><input type="checkbox" id="brand2"><label for="brand2">Brand 2</label></li>
+                            <li><input type="checkbox" id="brand3"><label for="brand3">Brand 3</label></li>
+                        </ul>
+                        <button class="clear-button" onclick="clearFilters('brand')">Clear</button>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-button active">
+                        Price Range <i class="fas fa-minus"></i>
+                    </button>
+                    <div class="accordion-content" style="display: block;">
+                        <ul>
+                            <li><input type="checkbox" id="price1"><label for="price1">Under $50</label></li>
+                            <li><input type="checkbox" id="price2"><label for="price2">$50 - $100</label></li>
+                            <li><input type="checkbox" id="price3"><label for="price3">Over $100</label></li>
+                        </ul>
+                        <button class="clear-button" onclick="clearFilters('price')">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="results">
+            <h2>Results</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Category</th>
+                        <th>Brand</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Smartphone</td>
+                        <td>Electronics</td>
+                        <td>Brand 1</td>
+                        <td>$299</td>
+                    </tr>
+                    <tr>
+                        <td>Blender</td>
+                        <td>Home Appliances</td>
+                        <td>Brand 2</td>
+                        <td>$49</td>
+                    </tr>
+                    <tr>
+                        <td>Novel</td>
+                        <td>Books</td>
+                        <td>Brand 3</td>
+                        <td>$15</td>
+                    </tr>
+                    <tr>
+                        <td>T-shirt</td>
+                        <td>Fashion</td>
+                        <td>Brand 1</td>
+                        <td>$20</td>
+                    </tr>
+                    <tr>
+                        <td>Tennis Racket</td>
+                        <td>Sports & Outdoors</td>
+                        <td>Brand 2</td>
+                        <td>$75</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function clearFilters(filterType) {
+            const checkboxes = document.querySelectorAll(`.accordion-content input[type="checkbox"]`);
+            checkboxes.forEach(checkbox => {
+                if (checkbox.id.includes(filterType)) {
+                    checkbox.checked = false;
+                }
+            });
+        }
+
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+                } else {
+                    content.style.display = 'block';
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
